@@ -495,6 +495,8 @@ class turnitintooltwo_submission {
     public function do_tii_submission($cm, $turnitintooltwoassignment) {
         global $DB, $USER, $CFG;
 
+        $this->record_turnitintooltwo_submission($cm, $this->id, $turnitintooltwoassignment->turnitintooltwo->course); // ALAN 20150820
+
         $config = turnitintooltwo_admin_config();
         $notice = array("success" => false);
         $context = context_module::instance($cm->id);
