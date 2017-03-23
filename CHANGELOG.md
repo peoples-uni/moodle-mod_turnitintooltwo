@@ -1,3 +1,68 @@
+### Date:		2017-March-13
+### Release:	v2017031301
+
+- Minor update Gradebook method refactor so it can be called from other contexts.
+- Extended the character limit for class and assignment titles.
+- Added a warning if PHP SOAP extension is not installed.
+- Implemented a 'force refresh button' to assignment settings page.
+- Resolved an issue affecting revealer's name in anonymous submissions.
+- Stopped re-enrolling previously un-enrolled Moodle students.
+- Fixed a bug with anonymity on newly created assignment parts.
+- Resolved bug affecting assignment inbox access.
+- Fixed an issue causing all submissions to refresh upon individual student login.
+
+
+**Extended the character limit for class and assignment titles** - Some users found the character limit for class and assignment titles restrictive; we've extended the title limits to 256 characters, allowing more freedom when setting up classes and assignments.
+
+**Added a warning if PHP SOAP extension is not installed** - We found that installation would fail without PHP SOAP (PHP5-SOAP, PHP7-SOAP) being installed, and although it's a required package, this wasn't listed as being so. We've added a warning in settings if the extension is not installed, saving you from a failed installation. 
+
+**Implemented a 'force refresh button' to assignment settings page** - Some users informed us that grades were failing to appear in the grade book after their insertion in the document viewer, as well as submission updates not transferring to the assignment inbox. To fix this, we've added a button allowing you to force refresh this data, syncing all submission changes to the grade book and inbox.
+
+**Resolved an issue affecting revealer's name in anonymous submissions** - Reports revealed that the student's name appeared as the revealer of an anonymous submission, rather than the name of the instructor. This resulted in Turnitin administrators having no record of the instructor who requested the reveal. This has now been rectified.
+
+**Stopped re-enrolling previously unenrolled Moodle students** - It appeared that unenrolled students would be re-enrolled when instructors downloaded submissions from Turnitin. We've fixed this! Now, when a student who has submitted is removed from a Moodle course, they will not be re-enrolled when the submission is refreshed.
+
+**Fixed a bug with anonymity on newly created assignment parts** - We received reports that when a second (or more parts) were added to a single-part anonymous assignment, the anonymity setting was not passed across. Our engineers have fixed this problem and our testers have ensured that new parts of an anonymous assignment are anonymous. Thanks for your patience with this one!
+
+**Resolved bug affecting assignment inbox access** - If a student had two submissions for one assignment part in Turnitin, the Moodle assignment inbox would continue to load and hang with the error message: Loading data from Turnitin. We resolved this by ensuring that the system only saves one submission record per student per assignment when refreshing submissions from Turnitin.
+
+**Fixed an issue causing all submissions to refresh upon individual student login** - If a student logged into the assignment inbox, all submissions were refreshed, causing students to show as having updated the grade for other graded submission(s) and subsequently appear as graders in grade reports. We've resolved this by ensuring that a student only has an effect on their own submission.
+
+
+---
+
+### Date:		2017-February-22
+### Release:	v2017022201
+
+- Verified against Moodle 3.2.
+- UI modified for compatibility with Boost theme.
+- First unit tests added to plugin.
+
+---
+
+### Date:		2017-January-25
+### Release:	v2017012501
+
+- This release and future releases will no longer work on Moodle 2.6.
+- The language strings have been updated across all supported languages.
+- The implementation of submission deletion has been changed so that it is no longer a link.
+- Data dump display has been optimised to help with large databases.
+- If the required fileinfo extension is missing it will now be mentioned on the plugin settings page.
+- The plugin will now not make excessive calls to Turnitin when using the bulk enrolment tool.
+- Suspended users now no longer appear in the assignment inbox.
+- Non-submitter e-mails will no longer be sent to inactive students. (Thanks to @junwan6)
+- Travis-CI has been aded to the plugin as an extra QA resource to help flag any issues with the code.
+- Inclusion paths were consolidated for the ./sdk directory. (Thanks to @eviweb)
+- Fixes:
+	- Fixed an issue with duplicate submission rows showing in the Moodle database.
+	- Fixed an issue with anonymous marking where the overall grade would sometimes not appear.
+	- The assignment edit API call no longer fails if repository settings don't match the plugin settings.
+	- The submission processing message that was missing in Moodle 3.1 is now visible again.
+	- Fixed a bug where the submission inbox would not load if an enrolled student has been deleted in Turnitin.
+	- Characters that cannot be used in a file name in Windows are now removed from submission titles to prevent submission errors.
+
+---
+
 ### Date:		2016-December-21
 ### Release:	v2016122101
 
@@ -5,9 +70,10 @@
 	- Changed the language codes to correctly recognise Simplified Chinese in Moodle.
 	- Pass the correct Simplified Chinese language code to Turnitin.
 
+---
+
 ### Date:		2016-September-14
 ### Release:	v2016091401
-
 
 - Remove leftover counter variable from get_submission_inbox function.
 - Refactored the get users functionality in several places to not include users with roles inherited from site level.
