@@ -1292,22 +1292,7 @@ class turnitintooltwo_assignment {
 
         // Update existing events for this assignment part if title or due date changed.
         if ($fieldname == "partname" || $fieldname == "dtdue") {
-
-            $dbselect = " modulename = ? AND instance = ? AND name LIKE ? ";
-            // Moodle pre 2.5 on SQL Server errors here as queries weren't allowed on ntext fields, the relevant fields
-            // are nvarchar from 2.6 onwards so we have to cast the relevant fields in pre 2.5 SQL Server setups.
-            if ($CFG->branch <= 25 && $CFG->dbtype == "sqlsrv") {
-                $dbselect = " CAST(modulename AS nvarchar(max)) = ? AND instance = ? AND CAST(name AS nvarchar(max)) = ? ";
-            }
-
-            if ($event = $DB->get_record_select("event", $dbselect,
-                                                array('turnitintooltwo', $this->turnitintooltwo->id, $currenteventname))) {
-
-                $event->name = $this->turnitintooltwo->name." - ".$partdetails->partname;
-                $event->timestart = $partdetails->dtdue;
-                $event->userid = $USER->id;
-                $DB->update_record('event', $event);
-            }
+            turnitintooltwo_update_event($this->turnitintooltwo, $partdetails);
         }
 
         // Update grade settings.
@@ -1332,20 +1317,20 @@ class turnitintooltwo_assignment {
         $this->turnitintooltwo->id = $this->id;
         $this->turnitintooltwo->timemodified = time();
 
-        // Get Moodle Course Object.
-        $legacy = (!empty($this->turnitintooltwo->legacy)) ? $this->turnitintooltwo->legacy : 0;
-        $coursetype = turnitintooltwo_get_course_type($legacy);
-        $course = $this->get_course_data($this->turnitintooltwo->course, $coursetype);
-
-        // Edit course in Turnitin.
-        $this->edit_tii_course($course);
-        $course->turnitin_ctl = $course->fullname . " (Moodle TT)";
-
         // Get Current Moodle Turnitin Tool data (Assignment).
         if (!$turnitintooltwonow = $DB->get_record("turnitintooltwo", array("id" => $this->id))) {
             turnitintooltwo_print_error('turnitintooltwogeterror', 'turnitintooltwo', null, null, __FILE__, __LINE__);
             exit();
         }
+
+        // Get Moodle Course Object.
+        $legacy = (!empty($turnitintooltwonow->legacy)) ? $turnitintooltwonow->legacy : 0;
+        $coursetype = turnitintooltwo_get_course_type($legacy);
+        $course = $this->get_course_data($this->turnitintooltwo->course, $coursetype);
+
+        // Edit course in Turnitin.
+        $this->edit_tii_course($course, $coursetype);
+        $course->turnitin_ctl = $course->fullname . " (Moodle TT)";
 
         // Get Current Moodle Turnitin Tool Parts Object.
         if (!$parts = $DB->get_records_select("turnitintooltwo_parts", " turnitintooltwoid = ? ", array($this->id), 'id ASC')) {

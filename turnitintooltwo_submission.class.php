@@ -180,7 +180,7 @@ class turnitintooltwo_submission {
                 $this->turnitintooltwoid = $turnitintooltwoassignment->turnitintooltwo->id;
             }
 
-            if (count($turnitintooltwoassignment->get_parts() > 1)) {
+            if (count($turnitintooltwoassignment->get_parts()) > 1) {
                 if ($submission->userid != 0) {
                     $usersubmissions = $turnitintooltwoassignment->get_user_submissions($submission->userid,
                                                             $submission->turnitintooltwoid);
@@ -952,5 +952,17 @@ private function record_turnitintooltwo_submission($cm, $submission_id, $course_
             $turnitincomms->handle_exceptions($e, "unanonymiseerror", false);
             return false;
         }
+    }
+
+    /**
+     * Checking if grade exists for assignment
+     *
+     * @param string $turnitintooltwoid
+     * @return int
+     */
+    public function count_graded_submissions($turnitintooltwoid) {
+        global $DB;
+        return $DB->count_records_select("turnitintooltwo_submissions", "turnitintooltwoid = :turnitintooltwoid AND submission_grade > 0",
+            array("turnitintooltwoid" => $turnitintooltwoid));
     }
 }

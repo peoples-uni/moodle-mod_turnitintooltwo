@@ -1,4 +1,126 @@
-### Date:	2018-August-28
+### Date:		2019-May-01
+### Release:	v2019050101
+
+#### :wrench: Fixes and enhancements
+
+#### Migration tool modal improvements
+
+We've made sure that the modal displays when using our migration tool. If your migration is successful, then a green notification box will be displayed to confirm this.
+
+#### Download student file button visibility
+We’ve been improving usability by clarifying available options to instructors. Previously, the download student files button was hidden until a student was selected. We’ve now made the button visible at all times, but it is only possible to invoke the button once a student has been selected.
+
+#### Migration bugs resolved
+There were some bugs affecting the migration process. One was causing assignment parts that had been deleted in V1 to reappear after the migration to V2. The other was placing new parts of migrated assignments in the incorrect class within Turnitin. These issues have been resolved.
+
+#### Student grades hidden until post date
+Now students will be unable to see grades in the Moodle grade book until the post date has passed. Big thanks to Neill Magill for the pull request with the fix to this issue!
+
+#### Privacy settings updates
+We now carry over privacy settings from Moodle V1 to Moodle V2 when the user migrates.
+
+---
+
+### Date:		2019-January-24
+### Release:	v2019012401
+
+#### :wrench: Fixes and enhancements
+
+#### You can now use special characters in file names
+
+When using special characters, such as an umlaut or a dash, in student names or submission titles could cause an error message to show for a small number of users using Windows servers. We've improved how our system reads extended character sets and are happy to report that this error message should no longer be shown. 
+
+#### Non-submitters and Messages boxes will now close correctly
+
+A bug had prevented some users from closing the boxes that appear for the non-submitters and Messages screens.
+
+Big thanks to Rex Lorenzo for the pull request with the fix to this issue!
+
+#### Support for Moodle PHP 7.2
+
+We had received some reports that unit tests could fail when upgraded to PHP 7.2
+
+Many thanks to ilya-catalyst for the pull request and fix!
+
+#### General security fixes.
+
+---
+
+### Date:		2018-December-21
+### Release:	v2018122101
+
+#### :wrench: Fixes and enhancements
+
+---
+
+#### Grade categories are now migrated between V1 and V2
+
+When you migrate from Moodle Direct V1 to Moodle Direct V2, we’ll now keep the grading category associated with the V1 assignment when we perform the transition.
+
+---
+
+### Date:		2018-December-18
+### Release:	v2018121801
+
+#### :zap: What's new
+
+---
+
+#### We now support Moodle 3.6
+
+Getting a head start on the new year by upgrading your Moodle instance? We’ve got you covered. Our Moodle Direct v2 plugin now supports Moodle 3.6. Check out [Check out our guide](https://www.turnitin.com/support/download-integrations) for a full list of the version of Moodle we support.
+
+#### :wrench: Fixes and enhancements
+
+---
+
+#### You can now set ETS as a default setting
+
+Are you a fan of ETS e-rater? Us too! To help you take advantage of it, you can now enable ETS e-rater as a default setting for your assignments.
+
+#### A new warning message when you try to change the Marks Available column
+
+A new warning message when you try to change the Marks Available column - We’ve added this notification just to make sure that editing this field is what you want to do. Editing this field after you’ve finished grading, can change entries in the Moodle gradebook. Don’t worry, you can still edit this field should you need to!
+
+#### A couple of backend security fixes.
+
+---
+
+### Date:		2018-October-26
+### Release:	v2018102601
+
+#### Fixes and enhancements
+
+---
+
+#### The course restoration tool has now been restored for use!
+
+Were you previously using Turnitin.com or TurnitinUK.com before making the switch over to Moodle? The course restoration tool allows you to take your old classes and assignments with you by recreating them within Moodle. Previously, a bug had prevented this functionality from working as intended. Want to learn more? [Check out our guide](https://help.turnitin.com/Feedback_Studio/Moodle/Direct%20V2/Administrator/Administrator%20Category.htm#Turnitinclassrestoration).
+
+---
+
+### Date:		2018-October-19
+### Release:	v2018101901
+
+#### Fixes and enhancements
+
+---
+
+#### Assignments now display correctly on Moodle’s timeline
+
+We’ve made three separate fixes following Moodle’s new timeline support:
+
+- When creating a V2 assignment using course reset and the “use new dates” option, your assignment now displays correctly on the timeline.
+- By changing the due date of the assignment, this now will update on the timeline.
+- Providing that the assignment’s due date hasn’t already passed, any assignments created prior to our previous fix in v2018082801 will now appear on the timeline after an instructor accesses the assignment.
+
+#### Thanks to Paul Damiani and Rossco Hellmans
+
+We've received some invaluable bug fixes, in the form of pull requests, to help us improve Moodle V2. We’re really grateful!
+
+---
+
+### Date:		2018-August-28
 ### Release:	v2018082801
 
 ### :wrench: Fixes and enhancements
@@ -26,6 +148,7 @@ Moodle has superseded this update checker with a tool that not only checks for T
 You can find Moodle's **Check for available updates** button by visiting: Site administration > Plugins > Plugins overview.
 
 ---
+
 ### Date:	2018-May-23
 ### Release:	v2018052301
 
@@ -49,7 +172,7 @@ We've made the Moodle V2 repository settings much clearer, by providing easy-to-
 
 Moodle has released two plugins with privacy features to assist with GDPR compliance. While we've successfully implemented [Moodle's new privacy features](https://docs.moodle.org/dev/Privacy_API), Moodle's update is only available to those using Moodle 3.3.5+, 3.4.2+, or 3.5. Therefore, if you're using an earlier version, you must upgrade to have access to these new features.
 
-To inform you about the data we store in relation to our users, we now provide a detailed list via the Moodle Privacy and Policies page. Learn more about the data we're reporting on via our [Moodle Plugins and GDPR](https://guides.turnitin.com/03_Integrations/Turnitin_Partner_Integrations/Moodle/Moodle_Plugins_and_GDPR) page.
+To inform you about the data we store in relation to our users, we now provide a detailed list via the Moodle Privacy and Policies page. Learn more about the data we're reporting on via our [Moodle Plugins and GDPR](https://help.turnitin.com/feedback-studio/moodle/moodle-plugins-and-gdpr.htm) page.
 
 #### Students can request to download their data
 
@@ -59,7 +182,7 @@ Students have the ability to request an export of their data stored in Moodle. T
 
 Students can also request their data to be removed from Moodle. This requested can be accepted or declined by their Moodle administrator. If accepted, the administrator will remove the student data from Moodle. However, administrators must contact support@turnitin.com to request that student data be removed from Turnitin itself.
   
-> If you're a Moodle administrator, and using version 3.3.5+, 3.4.2+, or 3.5, follow the steps on the [Moodle Plugins and GDPR](https://guides.turnitin.com/03_Integrations/Turnitin_Partner_Integrations/Moodle/Moodle_Plugins_and_GDPR) page to view the data we store in Moodle.
+> If you're a Moodle administrator, and using version 3.3.5+, 3.4.2+, or 3.5, follow the steps on the [Moodle Plugins and GDPR](https://help.turnitin.com/feedback-studio/moodle/moodle-plugins-and-gdpr.htm) page to view the data we store in Moodle.
 
 
 #### You can now send all papers to your institutional repository by default!
